@@ -1,5 +1,6 @@
-extends Node2D
+extends Ship
 
+class_name Player
 
 var velocity = Vector2()
 var inputs = {

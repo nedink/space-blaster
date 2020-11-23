@@ -1,12 +1,18 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://player.gd" type="Script" id=1]
 [ext_resource path="res://Gun.tscn" type="PackedScene" id=2]
 
-[node name="Player" type="Node2D"]
+[sub_resource type="CircleShape2D" id=1]
+radius = 5.0
+
+[node name="Player" type="Node2D" groups=[
+"ally",
+]]
 script = ExtResource( 1 )
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2( -1, 0 )
 rotation = 1.5708
 polygon = PoolVector2Array( -2, -7, -7, 3, -6, 5, -4, 5, -1, 3, 1, 3, 4, 5, 6, 5, 7, 3, 2, -7, -3.49691e-07, -8 )
 
@@ -14,3 +20,9 @@ polygon = PoolVector2Array( -2, -7, -7, 3, -6, 5, -4, 5, -1, 3, 1, 3, 4, 5, 6, 5
 
 [node name="Gun" parent="." instance=ExtResource( 2 )]
 position = Vector2( 8, 0 )
+
+[node name="Body" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+shape = SubResource( 1 )
