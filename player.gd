@@ -2,7 +2,6 @@ extends Ship
 
 class_name Player
 
-var velocity = Vector2()
 var inputs = {
 	"up": false,
 	"down": false,
@@ -25,10 +24,7 @@ func _physics_process(delta):
 		if position.x < 128 - 16:
 			velocity = Vector2.RIGHT * 2
 	
-#	if position.x < 32 || :
-#		velocity *= 0.8
-		
-	position += velocity
+	._physics_process(delta)
 	
 	velocity = Vector2.ZERO
 

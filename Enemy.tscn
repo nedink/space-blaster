@@ -1,10 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://enemy.gd" type="Script" id=1]
+[ext_resource path="res://hpBar.gd" type="Script" id=2]
+[ext_resource path="res://HpBar.tscn" type="PackedScene" id=3]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 4.0
-height = 8.0
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 6.045, 7 )
 
 [node name="Enemy" type="Node2D" groups=[
 "enemy",
@@ -18,5 +19,7 @@ polygon = PoolVector2Array( 4, -8, -2, -6, -4, -4, -2, 0, -4, 4, -2, 6, 4, 8, 6,
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
-position = Vector2( 1, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 6 )
+
+[node name="HpBar" parent="." instance=ExtResource( 3 )]
+script = ExtResource( 2 )

@@ -1,4 +1,4 @@
-extends RayCast2D
+extends Position2D
 
 class_name Gun
 
