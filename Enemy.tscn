@@ -4,7 +4,7 @@
 [ext_resource path="res://hpBar.gd" type="Script" id=2]
 [ext_resource path="res://HpBar.tscn" type="PackedScene" id=3]
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.045, 7 )
 
 [node name="Enemy" type="Node2D" groups=[
@@ -19,7 +19,8 @@ polygon = PoolVector2Array( 4, -8, -2, -6, -4, -4, -2, 0, -4, 4, -2, 6, 4, 8, 6,
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
-shape = SubResource( 6 )
+shape = SubResource( 1 )
 
 [node name="HpBar" parent="." instance=ExtResource( 3 )]
+visible = false
 script = ExtResource( 2 )

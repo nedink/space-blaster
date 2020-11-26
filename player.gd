@@ -28,6 +28,8 @@ func _physics_process(delta):
 	
 	velocity = Vector2.ZERO
 
+
+
 func _input(event):
 	if event.is_pressed():
 		if event.is_action("cancel"):
@@ -49,3 +51,4 @@ func _input(event):
 			inputs["left"] = false
 		if event.is_action("right"):
 			inputs["right"] = false
+
