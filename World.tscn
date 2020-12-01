@@ -5,31 +5,27 @@
 [ext_resource path="res://world.gd" type="Script" id=3]
 [ext_resource path="res://Enemy.tscn" type="PackedScene" id=4]
 
-[sub_resource type="ParticlesMaterial" id=1]
-emission_shape = 2
-emission_box_extents = Vector3( 100, 1, 1 )
-flag_disable_z = true
-direction = Vector3( 0, 1, 0 )
-spread = 0.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 164.95
-initial_velocity_random = 0.17
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale_random = 0.25
-color = Color( 0.494118, 0.494118, 0.494118, 1 )
-hue_variation = 1.0
-hue_variation_random = 0.32
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
 
-[sub_resource type="Curve2D" id=2]
-_data = {
-"points": PoolVector2Array( 0.125547, -37.0363, -0.125547, 37.0363, 0, 0, 0, 0, 4.51968, 6.90507, 0, 46.6667 )
-}
+uniform vec2 direction = vec2(1.0,0.0);
+uniform float speed = 0.08;
+
+void fragment() 
+{
+	COLOR = texture(TEXTURE, UV + direction * TIME * speed);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/direction = Vector2( 0, -1 )
+shader_param/speed = 0.08
 
 [node name="World" type="Node2D"]
 script = ExtResource( 3 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 margin_right = 128.0
 margin_bottom = 227.0
 color = Color( 0, 0, 0, 1 )
@@ -37,30 +33,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ScrollingBackground" type="Sprite" parent="."]
+material = SubResource( 2 )
+texture = ExtResource( 2 )
+centered = false
+
 [node name="Label" type="Label" parent="."]
-visible = false
 margin_right = 40.0
 margin_bottom = 14.0
 text = "ear"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Stars" type="Node2D" parent="."]
-
-[node name="Particles2D" type="Particles2D" parent="Stars"]
-position = Vector2( 64, 0 )
-emitting = false
-amount = 50
-lifetime = 10.0
-process_material = SubResource( 1 )
-
-[node name="Particles2D2" type="Particles2D" parent="Stars"]
-position = Vector2( 64, 0 )
-emitting = false
-amount = 50
-lifetime = 91.32
-process_material = SubResource( 1 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -73,22 +57,7 @@ centered = false
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="Enemy1" parent="Enemies" instance=ExtResource( 4 )]
-position = Vector2( 63, 32 )
-
-[node name="Enemy2" parent="Enemies" instance=ExtResource( 4 )]
-position = Vector2( 89, 62 )
-
-[node name="Enemy3" parent="Enemies" instance=ExtResource( 4 )]
-position = Vector2( 31, 77 )
-
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 64, 192 )
 
-[node name="Path2D" type="Path2D" parent="."]
-position = Vector2( 16, 0 )
-scale = Vector2( 1, 1.2 )
-curve = SubResource( 2 )
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-rotation = 1.57402
+[node name="Enemy1" parent="." instance=ExtResource( 4 )]

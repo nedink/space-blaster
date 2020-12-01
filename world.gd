@@ -9,9 +9,11 @@ func _process(delta):
 	
 	var text = ""
 	for c in get_children():
-		text += c.name + " "
+		text += c.name[0] + " "
 	
-	$Label.text = text
+	
+#	$Label.text = text
+#	$Label.text = text
 	
 	
 	

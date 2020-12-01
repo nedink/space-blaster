@@ -1,0 +1,79 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://bullet/bullet.gd" type="Script" id=1]
+[ext_resource path="res://resources/bullet.png" type="Texture" id=2]
+[ext_resource path="res://bullet/particle_trail.gd" type="Script" id=3]
+[ext_resource path="res://LifeTimer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://muzzle_flash.gd" type="Script" id=5]
+
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0.981982 ), 0.0, -2.91959, 0, 0, Vector2( 1, 0 ), -0.497867, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[node name="Bullet" type="Position2D" groups=[
+"bullet",
+]]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 4, 0 )
+texture = ExtResource( 2 )
+
+[node name="Trajectory" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 10, 0 )
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="ParticleTrail" type="CPUParticles2D" parent="."]
+amount = 20
+lifetime = 0.5
+randomness = 0.5
+lifetime_randomness = 1.0
+local_coords = false
+spread = 20.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 50.0
+angular_velocity_random = 1.0
+damping = 50.0
+scale_amount = 2.0
+scale_amount_curve = SubResource( 2 )
+script = ExtResource( 3 )
+
+[node name="LifeTimer" parent="ParticleTrail" instance=ExtResource( 4 )]
+
+[node name="LifeTimer" parent="." instance=ExtResource( 4 )]
+wait_time = 4.0
+one_shot = true
+
+[node name="MuzzleFlash" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 6
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 1.0
+local_coords = false
+spread = 60.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 300.0
+initial_velocity_random = 0.7
+angular_velocity = -500.0
+angular_velocity_random = 1.0
+linear_accel = -100.0
+linear_accel_random = 0.5
+tangential_accel_random = 1.0
+damping = 100.0
+damping_random = 1.0
+angle = 50.0
+angle_random = 1.0
+scale_amount = 3.0
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 4 )
+script = ExtResource( 5 )
+
+[node name="LifeTimer" parent="MuzzleFlash" instance=ExtResource( 4 )]
+wait_time = 2.0

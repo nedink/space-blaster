@@ -12,9 +12,9 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Bullet",
 "language": "GDScript",
-"path": "res://bullet.gd"
+"path": "res://bullet/bullet.gd"
 }, {
-"base": "Ship",
+"base": "Node2D",
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://enemy.gd"
@@ -27,9 +27,9 @@ _global_script_classes=[ {
 "base": "CPUParticles2D",
 "class": "ParticleTrail",
 "language": "GDScript",
-"path": "res://particleTrail.gd"
+"path": "res://bullet/particle_trail.gd"
 }, {
-"base": "Ship",
+"base": "Node2D",
 "class": "Player",
 "language": "GDScript",
 "path": "res://player.gd"
@@ -38,11 +38,6 @@ _global_script_classes=[ {
 "class": "Projectile",
 "language": "GDScript",
 "path": "res://projectile.gd"
-}, {
-"base": "Node2D",
-"class": "Ship",
-"language": "GDScript",
-"path": "res://ship.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
@@ -50,8 +45,7 @@ _global_script_class_icons={
 "Gun": "",
 "ParticleTrail": "",
 "Player": "",
-"Projectile": "",
-"Ship": ""
+"Projectile": ""
 }
 
 [application]

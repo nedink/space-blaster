@@ -2,17 +2,17 @@ extends Position2D
 
 class_name Gun
 
-export var bulletScene = preload("res://Bullet.tscn")
-export var muzzleFlashScene = preload("res://MuzzleFlash.tscn")
+export var bulletScene = preload("res://bullet/Bullet.tscn")
+#export var muzzleFlashScene = preload("res://MuzzleFlash.tscn")
 export var repeating = false
 export var cooldownTime = 0.2
 
+onready var world = get_tree().root.get_node("World")
 onready var ship = get_parent()
 
 
 func _ready():
 	$CooldownTimer.wait_time = cooldownTime
-
 
 
 func _physics_process(delta):
@@ -34,10 +34,13 @@ func fire():
 	bullet.global_transform = global_transform
 	add_child(bullet)
 	
-	var muzzleFlash = muzzleFlashScene.instance()
-	muzzleFlash.emitting = true
-	muzzleFlash.one_shot = true
-	muzzleFlash.initial_velocity
-	add_child(muzzleFlash)
+#	var muzzleFlash = muzzleFlashScene.instance()
+#	muzzleFlash.emitting = true
+#	muzzleFlash.one_shot = true
+#	muzzleFlash.initial_velocity
+#	muzzleFlash.global_transform = global_transform
+#	world.add_child(muzzleFlash)
+
+#	add_child(muzzleFlash)
 #	$Particles.restart()
 	

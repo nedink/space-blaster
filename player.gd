@@ -1,4 +1,4 @@
-extends Ship
+extends Node2D
 
 class_name Player
 
@@ -8,7 +8,9 @@ var inputs = {
 	"left": false,
 	"right": false,
 }
+var velocity = Vector2()
 
+onready var body = $Body
 
 func _physics_process(delta):
 	$Tween.interpolate_property(self, "rotation", rotation, (get_global_mouse_position() - global_position).angle(), 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT)
@@ -24,7 +26,7 @@ func _physics_process(delta):
 		if position.x < 128 - 16:
 			velocity = Vector2.RIGHT * 2
 	
-	._physics_process(delta)
+	position += velocity
 	
 	velocity = Vector2.ZERO
 
