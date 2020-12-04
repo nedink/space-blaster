@@ -24,11 +24,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://gun.gd"
 }, {
-"base": "CPUParticles2D",
-"class": "ParticleTrail",
-"language": "GDScript",
-"path": "res://bullet/particle_trail.gd"
-}, {
 "base": "Node2D",
 "class": "Player",
 "language": "GDScript",
@@ -43,7 +38,6 @@ _global_script_class_icons={
 "Bullet": "",
 "Enemy": "",
 "Gun": "",
-"ParticleTrail": "",
 "Player": "",
 "Projectile": ""
 }

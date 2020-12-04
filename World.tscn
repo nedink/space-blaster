@@ -55,9 +55,7 @@ visible = false
 texture = ExtResource( 2 )
 centered = false
 
-[node name="Enemies" type="Node2D" parent="."]
+[node name="Enemy1" parent="." instance=ExtResource( 4 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 64, 192 )
-
-[node name="Enemy1" parent="." instance=ExtResource( 4 )]

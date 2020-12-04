@@ -6,11 +6,10 @@
 [ext_resource path="res://LifeTimer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://muzzle_flash.gd" type="Script" id=5]
 
-
-[sub_resource type="Curve" id=2]
+[sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0.981982 ), 0.0, -2.91959, 0, 0, Vector2( 1, 0 ), -0.497867, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Bullet" type="Position2D" groups=[
@@ -40,7 +39,7 @@ initial_velocity = 50.0
 angular_velocity_random = 1.0
 damping = 50.0
 scale_amount = 2.0
-scale_amount_curve = SubResource( 2 )
+scale_amount_curve = SubResource( 1 )
 script = ExtResource( 3 )
 
 [node name="LifeTimer" parent="ParticleTrail" instance=ExtResource( 4 )]
@@ -72,7 +71,7 @@ angle = 50.0
 angle_random = 1.0
 scale_amount = 3.0
 scale_amount_random = 1.0
-scale_amount_curve = SubResource( 4 )
+scale_amount_curve = SubResource( 2 )
 script = ExtResource( 5 )
 
 [node name="LifeTimer" parent="MuzzleFlash" instance=ExtResource( 4 )]

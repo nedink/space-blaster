@@ -9,13 +9,14 @@ extents = Vector2( 6.045, 7 )
 
 [sub_resource type="Curve2D" id=2]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -32, 24, 0, 0, 0, 0, 104, 24, 0, 0, 0, 0, 112, 32, 0, 0, 0, 0, 112, 48, 0, 0, 0, 0, 104, 56, 0, 0, 0, 0, 24, 56, 0, 0, 0, 0, 16, 64, 0, 0, 0, 0, 16, 80, 0, 0, 0, 0, 24, 88, 0, 0, 0, 0, 160, 88 )
+"points": PoolVector2Array( 0, 0, 0, 0, -32, 24, 0, 0, 0, 0, 112, 24, 0, 0, 0, 0, 112, 56, 0, 0, 0, 0, 16, 56, 0, 0, 0, 0, 16, 88, 0, 0, 0, 0, 160, 88 )
 }
 
 [node name="Enemy" type="Node2D" groups=[
 "enemy",
 ]]
 script = ExtResource( 1 )
+speed = 0
 hp = 3
 
 [node name="HpBar" parent="." instance=ExtResource( 3 )]
@@ -35,5 +36,9 @@ polygon = PoolVector2Array( 4, -8, -2, -6, -4, -4, -2, 0, -4, 4, -2, 6, 4, 8, 6,
 curve = SubResource( 2 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2( -32, 24 )
-rotation = -4.87179e-07
+position = Vector2( 61.16, 24 )
+offset = 93.2297
+lookahead = 0.1
+
+[node name="Shoot" type="Position2D" parent="."]
+position = Vector2( 112, 40 )

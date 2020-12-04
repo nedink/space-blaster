@@ -13,8 +13,10 @@ var velocity = Vector2()
 onready var body = $Body
 
 func _physics_process(delta):
-	$Tween.interpolate_property(self, "rotation", rotation, (get_global_mouse_position() - global_position).angle(), 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT)
-	$Tween.start()
+#	$Tween.interpolate_property(self, "rotation", rotation, (get_global_mouse_position() - global_position).angle(), 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+#	$Tween.start()
+	look_at(get_global_mouse_position())
+#	rotation = get_angle_to(get_global_mouse_position())
 #	if inputs["up"]:
 #		velocity += Vector2.UP * 0.1
 #	if inputs["down"]:

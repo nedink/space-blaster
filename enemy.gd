@@ -3,8 +3,7 @@ extends Node2D
 class_name Enemy
 
 # pixels per 1/60 second
-var speed = 1
-
+export var speed = 1
 export var hp = 10
 
 onready var hpBar = $HpBar

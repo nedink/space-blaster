@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=2]
+
+[sub_resource type="Gradient" id=9]
+offsets = PoolRealArray( 0, 0.485185, 0.8, 0.881481, 0.940741, 1 )
+colors = PoolColorArray( 0.992157, 1, 0, 1, 0.823529, 0, 0, 1, 0.407843, 0.109804, 0.368627, 1, 0.462745, 0.0392157, 0.0705882, 1, 0.976471, 1, 0.352941, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=10]
+gradient = SubResource( 9 )
+
+[sub_resource type="ParticlesMaterial" id=11]
+lifetime_randomness = 0.5
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+tangential_accel = 100.0
+tangential_accel_random = 1.0
+damping = 70.0
+damping_random = 0.5
+scale = 2.0
+scale_random = 1.0
+color_ramp = SubResource( 10 )
+hue_variation = 1.0
+
+[sub_resource type="ParticlesMaterial" id=12]
+lifetime_randomness = 0.5
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+tangential_accel = -100.0
+tangential_accel_random = 1.0
+damping = 70.0
+damping_random = 0.5
+scale = 2.0
+scale_random = 1.0
+color_ramp = SubResource( 10 )
+hue_variation = 1.0
+
+[node name="PoisonTrail" type="Node2D"]
+
+[node name="Particles2D" type="Particles2D" parent="."]
+amount = 25
+randomness = 1.0
+visibility_rect = Rect2( -2000, -2000, 4000, 4000 )
+local_coords = false
+process_material = SubResource( 11 )
+
+[node name="Particles2D2" type="Particles2D" parent="."]
+amount = 25
+randomness = 1.0
+visibility_rect = Rect2( -2000, -2000, 4000, 4000 )
+local_coords = false
+process_material = SubResource( 12 )

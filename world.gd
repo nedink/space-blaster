@@ -11,7 +11,9 @@ func _process(delta):
 	for c in get_children():
 		text += c.name[0] + " "
 	
-	
+	for c in get_children():
+		if c is CPUParticles2D:
+			print("particles")
 #	$Label.text = text
 #	$Label.text = text
 	
