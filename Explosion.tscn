@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=2]
+
+[sub_resource type="ParticlesMaterial" id=1]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 70.0
+angle = 90.0
+angle_random = 1.0
+scale = 3.0
+scale_random = 1.0
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.216981, 0.897635 ), 1.24144, 1.24144, 0, 0, Vector2( 0.792453, 0.974211 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.17241 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 50.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 30.0
+angle = 90.0
+angle_random = 1.0
+scale = 10.0
+scale_random = 1.0
+scale_curve = SubResource( 3 )
+
+[node name="Explosion" type="Node2D"]
+
+[node name="Particles2D" type="Particles2D" parent="."]
+amount = 20
+lifetime = 1.5
+explosiveness = 1.0
+local_coords = false
+process_material = SubResource( 1 )
+
+[node name="Particles2D2" type="Particles2D" parent="."]
+amount = 20
+lifetime = 1.5
+speed_scale = 2.0
+explosiveness = 1.0
+local_coords = false
+process_material = SubResource( 4 )

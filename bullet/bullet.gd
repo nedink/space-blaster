@@ -33,7 +33,7 @@ func _physics_process(delta):
 		
 
 	# scal to velocity
-	$Trajectory.cast_to = $Trajectory.cast_to.normalized() * velocity
+	$Trajectory.cast_to = $Trajectory.cast_to.normalized() * velocity * delta
 	# test raycast
 	if $Trajectory.is_colliding():
 		var collider:Node2D = $Trajectory.get_collider().get_parent().damage(damage)
@@ -44,6 +44,8 @@ func _physics_process(delta):
 		$LifeTimer.start()
 		
 		$ParticleTrail.emitting = false
+		for c in $SparkTrail.get_children():
+			c.emitting = false
 		set_physics_process(false)
 		
 		# reparent trail
