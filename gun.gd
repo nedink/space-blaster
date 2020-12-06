@@ -4,8 +4,14 @@ class_name Gun
 
 export var bulletScene = preload("res://bullet/Bullet.tscn")
 #export var muzzleFlashScene = preload("res://MuzzleFlash.tscn")
+
+export var firing = false
 export var repeating = false
 export var cooldownTime = 0.2
+export var spread = 0.0
+export var payloadCount = 1
+export var velocityRatio = 1
+
 
 onready var world = get_tree().root.get_node("World")
 onready var ship = get_parent()
@@ -16,16 +22,21 @@ func _ready():
 
 
 func _physics_process(delta):
-	if Input.is_action_pressed("primary"):
-		if repeating:
-			if $CooldownTimer.is_stopped():
-				fire()
-				$CooldownTimer.start()
-			else:
-				pass
-	
-	if not repeating && Input.is_action_just_pressed("primary"):
+	if firing and $CooldownTimer.is_stopped():
 		fire()
+		$CooldownTimer.start()
+	
+#	if Input.is_action_pressed("primary"):
+#		if repeating:
+#			if $CooldownTimer.is_stopped():
+#				fire()
+#				$CooldownTimer.start()
+#			else:
+#				pass
+	
+#	if Input.is_action_just_pressed("primary"):
+#		fire()
+	
 
 
 func fire():

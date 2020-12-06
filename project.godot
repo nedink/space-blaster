@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://bullet/bullet.gd"
 }, {
-"base": "Node2D",
+"base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://enemy.gd"
@@ -24,10 +24,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://gun.gd"
 }, {
-"base": "Node2D",
+"base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
 "path": "res://player.gd"
+}, {
+"base": "Area2D",
+"class": "PlayerPosition",
+"language": "GDScript",
+"path": "res://player_position.gd"
 }, {
 "base": "Node2D",
 "class": "Projectile",
@@ -39,6 +44,7 @@ _global_script_class_icons={
 "Enemy": "",
 "Gun": "",
 "Player": "",
+"PlayerPosition": "",
 "Projectile": ""
 }
 
@@ -49,8 +55,8 @@ run/main_scene="res://World.tscn"
 
 [display]
 
-window/size/width=128
-window/size/height=227
+window/size/width=320
+window/size/height=180
 window/size/fullscreen=true
 window/dpi/allow_hidpi=true
 window/stretch/mode="viewport"
