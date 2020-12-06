@@ -6,7 +6,7 @@ var lifeTimerScene = preload("res://LifeTimer.tscn")
 
 export var velocity = 10
 export var acceleration = 0
-export var damage = 1.0;
+export var damage = 1.0
 
 
 

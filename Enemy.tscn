@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://enemy.gd" type="Script" id=1]
 [ext_resource path="res://hpBar.gd" type="Script" id=2]
 [ext_resource path="res://HpBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://crabmite_behavior.gd" type="Script" id=4]
+[ext_resource path="res://Gun.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.045, 7 )
@@ -15,6 +16,9 @@ collision_layer = 2
 script = ExtResource( 1 )
 mass = 0.0
 hp = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 4, -8, 6, -6, 2, 0, 6, 6, 4, 8, -2, 6, -4, 4, -2, 0, -4, -4, -2, -6 )
 
 [node name="HpBar" parent="." instance=ExtResource( 3 )]
 visible = false
@@ -29,13 +33,7 @@ shape = SubResource( 1 )
 [node name="Polygon2D" type="Polygon2D" parent="Body"]
 polygon = PoolVector2Array( 4, -8, -2, -6, -4, -4, -2, 0, -4, 4, -2, 6, 4, 8, 6, 6, 2, 0, 6, -6 )
 
-[node name="Shoot" type="Position2D" parent="."]
-position = Vector2( 112, 40 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 4, -8, 6, -6, 2, 0, 6, 6, 4, 8, -2, 6, -4, 4, -2, 0, -4, -4, -2, -6 )
-
-[node name="Timer" type="Timer" parent="."]
+[node name="Gun" parent="." instance=ExtResource( 5 )]
 
 [node name="Behavior" type="Node2D" parent="."]
 script = ExtResource( 4 )
@@ -43,6 +41,7 @@ script = ExtResource( 4 )
 [node name="Tween" type="Tween" parent="Behavior"]
 
 [node name="MovingTimer" type="Timer" parent="Behavior"]
+wait_time = 2.0
 one_shot = true
 autostart = true
 
@@ -50,5 +49,10 @@ autostart = true
 wait_time = 2.0
 one_shot = true
 autostart = true
+
+[node name="AimingTimer" type="Timer" parent="Behavior"]
+one_shot = true
+autostart = true
 [connection signal="timeout" from="Behavior/MovingTimer" to="Behavior" method="_on_MovingTimer_timeout"]
 [connection signal="timeout" from="Behavior/FiringTimer" to="Behavior" method="_on_FiringTimer_timeout"]
+[connection signal="timeout" from="Behavior/AimingTimer" to="Behavior" method="_on_FiringTimer_timeout"]

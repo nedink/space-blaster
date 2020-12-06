@@ -4,7 +4,7 @@ class_name Enemy
 
 # pixels per 1/60 second
 export var mass = 1.0
-export var speed = 1.0
+export var speed = 100
 export var hp = 10
 export var max_speed = Vector2(50, 50)
 

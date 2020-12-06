@@ -116,3 +116,6 @@ func _input(event:InputEvent):
 #func _on_Player_input_event(viewport, event, shape_idx):
 #
 #	pass # Replace with function body.
+
+func damage(amt:float):
+	print("ouch " + str(amt))
