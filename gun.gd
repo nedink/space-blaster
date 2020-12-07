@@ -4,13 +4,14 @@ class_name Gun
 
 export var bulletScene = preload("res://bullet/Bullet.tscn")
 #export var muzzleFlashScene = preload("res://MuzzleFlash.tscn")
-
 export var firing = false
 export var repeating = false
 export var cooldownTime = 0.2
 export var spread = 0.0
-export var payloadCount = 1
+export var splits = 1
 export var velocityRatio = 1
+export var muzzleVelocity = 100
+
 
 
 onready var world = get_tree().root.get_node("World")
@@ -43,6 +44,7 @@ func fire():
 	var bullet = bulletScene.instance()
 	bullet.set_as_toplevel(true)
 	bullet.global_transform = global_transform
+	bullet.velocity = muzzleVelocity
 	add_child(bullet)
 	
 #	var muzzleFlash = muzzleFlashScene.instance()

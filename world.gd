@@ -1,6 +1,9 @@
 extends Node2D
 
 
+var hpBarScene = preload("res://HpBar.tscn")
+var enemyScene = preload("res://Enemy.tscn")
+
 
 func _process(delta):
 #	$Label.text = str(get_tree().get_nodes_in_group("bullet").size())
@@ -16,13 +19,16 @@ func _process(delta):
 		if c is CPUParticles2D:
 			print("particles")
 	
-	
-#	$Label.text = text
-#	$Label.text = text
-	
-	
-	
-#	for c in get_children():
-#		if c is CPUParticles2D:
-#			print(c.name)
 
+
+func _physics_process(delta):
+	if get_tree().get_nodes_in_group("enemy").empty():
+		var enemy = enemyScene.instance()
+		$Wave1/LineMonitorBehavior/PathFollow2D.add_child(enemy)
+		
+		
+
+
+func _input(event):
+	if event.is_action_pressed("pause"):
+		get_tree().paused = !get_tree().paused

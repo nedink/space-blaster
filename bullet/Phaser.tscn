@@ -1,30 +1,25 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://bullet/bullet.gd" type="Script" id=1]
-[ext_resource path="res://resources/phaser.png" type="Texture" id=2]
-[ext_resource path="res://bullet/particle_trail.gd" type="Script" id=3]
+[ext_resource path="res://resources/phaser_2.png" type="Texture" id=2]
 [ext_resource path="res://LifeTimer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://muzzle_flash.gd" type="Script" id=5]
 [ext_resource path="res://resources/stick.png" type="Texture" id=6]
 
-[sub_resource type="CanvasItemMaterial" id=5]
+[sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
 
-[sub_resource type="Environment" id=6]
-background_mode = 4
-glow_enabled = true
-
-[sub_resource type="Curve" id=1]
+[sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 0.981982 ), 0.0, -2.36486, 0, 0, Vector2( 1, 0 ), -0.328313, 0.0, 0, 0 ]
 
-[sub_resource type="Gradient" id=2]
+[sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0, 0.357616, 0.543046, 0.850993 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 0.819608, 0.34902, 1, 1, 0, 0, 1, 0.121569, 0, 0.133333, 1 )
 
-[sub_resource type="Curve" id=3]
+[sub_resource type="Curve" id=5]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0, 0.225166, 0.384106, 0.493377, 0.569536, 0.665563, 0.831126 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 0.967343, 0.818965, 1, 1, 0.819608, 0, 1, 1, 0.32549, 0, 1, 1, 0, 0, 1, 0.423529, 0, 0.203922, 1, 0, 0, 0, 1 )
 
@@ -51,12 +46,16 @@ scale_random = 1.0
 color_ramp = SubResource( 8 )
 hue_variation = 1.0
 
+[sub_resource type="ParticlesMaterial" id=10]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
 [node name="Phaser" type="Position2D" groups=[
 "bullet",
 ]]
-self_modulate = Color( 1, 3, 1, 1 )
 script = ExtResource( 1 )
-velocity = 500
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 4.0
@@ -74,13 +73,13 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 5 )
+pause_mode = 1
+modulate = Color( 1.56863, 1.4902, 1.30196, 1 )
+self_modulate = Color( 1.3, 1.3, 1.3, 1 )
+material = SubResource( 1 )
 use_parent_material = true
 position = Vector2( 4, 0 )
 texture = ExtResource( 2 )
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 6 )
 
 [node name="Trail" type="Node2D" parent="."]
 
@@ -97,9 +96,8 @@ gravity = Vector2( 0, 0 )
 initial_velocity = 100.0
 angular_velocity_random = 1.0
 damping = 100.0
-scale_amount_curve = SubResource( 1 )
-color_ramp = SubResource( 2 )
-script = ExtResource( 3 )
+scale_amount_curve = SubResource( 3 )
+color_ramp = SubResource( 4 )
 
 [node name="MuzzleFlash" type="CPUParticles2D" parent="Effects"]
 visible = false
@@ -125,8 +123,8 @@ angle = 50.0
 angle_random = 1.0
 scale_amount = 3.0
 scale_amount_random = 1.0
-scale_amount_curve = SubResource( 3 )
-color_ramp = SubResource( 4 )
+scale_amount_curve = SubResource( 5 )
+color_ramp = SubResource( 6 )
 script = ExtResource( 5 )
 
 [node name="LifeTimer" parent="Effects/MuzzleFlash" instance=ExtResource( 4 )]
@@ -138,5 +136,7 @@ randomness = 1.0
 visibility_rect = Rect2( -2000, -2000, 4000, 4000 )
 local_coords = false
 process_material = SubResource( 9 )
+
+[node name="Particles2D" type="Particles2D" parent="Effects"]
+process_material = SubResource( 10 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="tree_exiting" from="Effects/ParticleTrail" to="Effects/ParticleTrail" method="_on_ParticleTrail_tree_exiting"]

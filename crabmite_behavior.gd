@@ -22,8 +22,9 @@ func _physics_process(delta):
 		if (target_pos - ship.position).length() < 50:
 			set_state(State.AIMING)
 		else:
-			ship.look_at(target_pos)
-			ship.move_and_slide(Vector2.RIGHT.rotated(ship.get_angle_to(target_pos)) * 50)
+			pass
+#			ship.look_at(target_pos)
+#			ship.move_and_slide(Vector2.RIGHT.rotated(ship.get_angle_to(target_pos)) * 50)
 		
 	if state == State.AIMING:
 		pass
@@ -33,7 +34,7 @@ func _physics_process(delta):
 		pass
 #		ship.velocity = Vector2()
 	
-	ship.velocity = move_step
+#	ship.velocity = move_step
 	
 
 
@@ -47,7 +48,7 @@ func set_state(s):
 	if state == State.MOVING:
 		# pick random location
 		target_pos = Vector2(rand_range(0, get_viewport_rect().end.x), rand_range(0, get_viewport_rect().end.y))
-		ship.get_node("Gun").firing = false
+#		ship.get_node("Gun").firing = false
 		$FiringTimer.stop()
 		$AimingTimer.stop()
 		$MovingTimer.start()
@@ -55,13 +56,13 @@ func set_state(s):
 	if state == State.AIMING:
 		# pick player position
 		target_pos = player.position
-		ship.get_node("Gun").firing = false
+#		ship.get_node("Gun").firing = false
 		$FiringTimer.stop()
 		$MovingTimer.stop()
 		$AimingTimer.start()
 	
 	if state == State.FIRING:
-		ship.get_node("Gun").firing = true
+#		ship.get_node("Gun").firing = true
 		$MovingTimer.stop()
 		$AimingTimer.stop()
 		$FiringTimer.start()

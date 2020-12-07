@@ -3,6 +3,7 @@ extends KinematicBody2D
 class_name Player
 
 export var mass = 1.0
+export var speed = 100
 
 var inputs = {
 	"up": false,
@@ -10,7 +11,7 @@ var inputs = {
 	"left": false,
 	"right": false,
 }
-var velocity = Vector2()
+var velocity = Vector2.ZERO
 var queue_move = false # set position next physics loop
 
 onready var body = $Body
@@ -35,22 +36,21 @@ func _physics_process(delta):
 #		position += 
 	
 	# move with wasd
+	velocity = Vector2.ZERO
 	if inputs["up"]:
-		velocity += Vector2.UP * 100
+		velocity += Vector2.UP
 	if inputs["down"]:
-		velocity += Vector2.DOWN * 100
+		velocity += Vector2.DOWN
 	if inputs["left"]:
-		velocity += Vector2.LEFT * 100
+		velocity += Vector2.LEFT
 	if inputs["right"]:
-		velocity += Vector2.RIGHT * 100
+		velocity += Vector2.RIGHT
+	velocity = velocity.normalized() * speed
 	
 	
 	var step = move_and_slide(velocity)
 	
 	for i in get_slide_count():
-#		var collision = get_slide_collision(i)
-#		if (velocity - step).length() < mass:
-#			collision.collider.move_and_slide(velocity - step)
 		modulate = Color.red
 	
 	if get_slide_count() == 0:
@@ -58,7 +58,6 @@ func _physics_process(delta):
 #	position += 
 	
 	
-	velocity = Vector2.ZERO
 	
 	# wrap
 	position.x = wrapf(position.x, 0, get_viewport_rect().end.x)

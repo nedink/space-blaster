@@ -11,7 +11,9 @@ extents = Vector2( 6.045, 7 )
 
 [node name="Enemy" type="KinematicBody2D" groups=[
 "enemy",
+"hp",
 ]]
+pause_mode = 1
 collision_layer = 2
 script = ExtResource( 1 )
 mass = 0.0
@@ -34,6 +36,7 @@ shape = SubResource( 1 )
 polygon = PoolVector2Array( 4, -8, -2, -6, -4, -4, -2, 0, -4, 4, -2, 6, 4, 8, 6, 6, 2, 0, 6, -6 )
 
 [node name="Gun" parent="." instance=ExtResource( 5 )]
+firing = false
 
 [node name="Behavior" type="Node2D" parent="."]
 script = ExtResource( 4 )

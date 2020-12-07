@@ -8,6 +8,7 @@ script = ExtResource( 1 )
 bulletScene = ExtResource( 2 )
 firing = true
 repeating = true
+muzzleVelocity = 500
 
 [node name="CooldownTimer" type="Timer" parent="."]
 wait_time = 0.2
