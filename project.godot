@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
-"path": "res://enemy.gd"
+"path": "res://enemy/enemy.gd"
 }, {
 "base": "Position2D",
 "class": "Gun",
@@ -33,19 +33,13 @@ _global_script_classes=[ {
 "class": "PlayerPosition",
 "language": "GDScript",
 "path": "res://player_position.gd"
-}, {
-"base": "Node2D",
-"class": "Projectile",
-"language": "GDScript",
-"path": "res://projectile.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
 "Enemy": "",
 "Gun": "",
 "Player": "",
-"PlayerPosition": "",
-"Projectile": ""
+"PlayerPosition": ""
 }
 
 [application]

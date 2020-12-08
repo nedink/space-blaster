@@ -14,7 +14,7 @@ var inputs = {
 var velocity = Vector2.ZERO
 var queue_move = false # set position next physics loop
 
-onready var body = $Body
+onready var body = $CollisionPolygon2D
 
 
 

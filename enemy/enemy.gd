@@ -5,7 +5,7 @@ class_name Enemy
 # pixels per 1/60 second
 export var mass = 1.0
 export var speed = 100
-export var hp = 10
+export var hp = 1
 export var max_speed = Vector2(50, 50)
 
 var velocity = Vector2()
@@ -15,7 +15,7 @@ onready var body = $Body
 onready var path = get_parent().get_node("PathFollow2D")
 onready var player = get_tree().root.get_node("World/Player")
 
-var explosionScene = preload("res://Explosion.tscn")
+var explosionScene = preload("res://effects/Explosion.tscn")
 
 
 func _ready():
@@ -43,6 +43,8 @@ func _physics_process(delta):
 
 
 func damage(amt:float):
+	$AnimationPlayer.play("blink white")
+	$AnimationPlayer.seek(0)
 	hpBar.show()
 	hp -= amt
 	if hp < 1:
@@ -53,5 +55,3 @@ func damage(amt:float):
 	hpBar.value = hp
 
 
-#func _draw():
-#	draw_arc()

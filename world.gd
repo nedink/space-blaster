@@ -2,7 +2,7 @@ extends Node2D
 
 
 var hpBarScene = preload("res://HpBar.tscn")
-var enemyScene = preload("res://Enemy.tscn")
+var enemyScene = preload("res://enemy/Enemy.tscn")
 
 
 func _process(delta):

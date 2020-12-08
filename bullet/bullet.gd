@@ -14,7 +14,7 @@ onready var ship = gun.get_parent()
 
 
 func _ready():
-	$Trajectory.collision_mask = ship.body.collision_mask
+	$Trajectory.collision_mask = ship.collision_mask
 #	$ParticleTrail.angle = rad2deg(sin(global_rotation))
 #	$ParticleTrail.angular_velocity = rand_range(-800, 800)
 #	print(global_rotation)
