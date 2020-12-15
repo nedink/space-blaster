@@ -20,6 +20,9 @@ var explosionScene = preload("res://effects/Explosion.tscn")
 
 func _ready():
 	hpBar.max_value = hp
+	
+	set_collision_layer_bit(2, true)
+	set_collision_mask_bit(1, true)
 
 
 func _physics_process(delta):
@@ -28,7 +31,7 @@ func _physics_process(delta):
 #	displace = Vector2(min(displace.x, max_speed.x), min(displace.y, max_speed.y))
 #	look_at(player.position)
 #	velocity += displace
-#	print(velocity)
+	print(velocity)
 	velocity = velocity.normalized() * speed
 	var movement = move_and_slide(velocity)
 	

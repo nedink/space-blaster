@@ -90,8 +90,6 @@ func _input(event:InputEvent):
 		
 		
 	if event.is_pressed():
-		if event.is_action("cancel"):
-			get_tree().quit(1)
 		if event.is_action("up"):
 			inputs["up"] = true
 		if event.is_action("down"):

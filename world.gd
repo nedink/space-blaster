@@ -1,7 +1,7 @@
 extends Node2D
 
 
-var hpBarScene = preload("res://HpBar.tscn")
+var hpBarScene = preload("res://enemy/HpBar.tscn")
 var enemyScene = preload("res://enemy/Enemy.tscn")
 
 
@@ -21,14 +21,9 @@ func _process(delta):
 	
 
 
-func _physics_process(delta):
-	if get_tree().get_nodes_in_group("enemy").empty():
-		var enemy = enemyScene.instance()
-		$Wave1/LineMonitorBehavior/PathFollow2D.add_child(enemy)
-		
-		
-
-
 func _input(event):
-	if event.is_action_pressed("pause"):
-		get_tree().paused = !get_tree().paused
+	if event.is_pressed():
+		if event.is_action("pause"):
+			get_tree().paused = !get_tree().paused
+		if event.is_action("cancel"):
+			get_tree().quit(1)

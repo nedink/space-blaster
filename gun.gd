@@ -41,11 +41,15 @@ func _physics_process(delta):
 
 
 func fire():
-	var bullet = bulletScene.instance()
-	bullet.set_as_toplevel(true)
-	bullet.global_transform = global_transform
-	bullet.velocity = muzzleVelocity
-	add_child(bullet)
+	for s in splits:
+		# choose angle, based on 
+#		var angle = 
+		
+		var bullet = bulletScene.instance()
+		bullet.set_as_toplevel(true)
+		bullet.global_transform = global_transform
+		bullet.velocity = muzzleVelocity
+		add_child(bullet)
 	
 #	var muzzleFlash = muzzleFlashScene.instance()
 #	muzzleFlash.emitting = true

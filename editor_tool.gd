@@ -6,7 +6,6 @@ export var copy_poly = false setget set_copy
 
 
 func set_copy(val):
-	Polygon2D
 	copy_poly = val
 	print(copy_poly)
 

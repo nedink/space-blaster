@@ -81,8 +81,6 @@ use_parent_material = true
 position = Vector2( 4, 0 )
 texture = ExtResource( 2 )
 
-[node name="Trail" type="Node2D" parent="."]
-
 [node name="Effects" type="Node2D" parent="."]
 
 [node name="ParticleTrail" type="CPUParticles2D" parent="Effects"]
