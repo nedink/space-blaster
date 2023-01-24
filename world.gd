@@ -19,6 +19,12 @@ func _process(delta):
 		if c is CPUParticles2D:
 			print("particles")
 	
+	
+	
+	# Move camera towards cursor
+	$Player/Camera2D.position = $Player.get_local_mouse_position() * 0.2
+	
+	
 
 
 func _input(event):

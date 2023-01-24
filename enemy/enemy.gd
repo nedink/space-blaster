@@ -10,7 +10,7 @@ export var max_speed = Vector2(50, 50)
 
 var velocity = Vector2()
 
-onready var hpBar = $HpBar
+onready var hpBar = $UI/HpBar
 onready var body = $Body
 onready var path = get_parent().get_node("PathFollow2D")
 onready var player = get_tree().root.get_node("World/Player")
@@ -19,28 +19,34 @@ var explosionScene = preload("res://effects/Explosion.tscn")
 
 
 func _ready():
-	hpBar.max_value = hp
+#	hpBar.max_value = hp
 	
 	set_collision_layer_bit(2, true)
 	set_collision_mask_bit(1, true)
 
 
 func _physics_process(delta):
+	
+#	move_and_slide((Vector2.ZERO - position) * 0.2)
+	position = Vector2.ZERO
+	
+	
 #	velocity = (Vector2.RIGHT + Vector2.DOWN) * 20
 #	var displace = Vector2(lerp(position.x, player.position.x, 0.9), lerp(position.y, player.position.y, 0.9)) - position
 #	displace = Vector2(min(displace.x, max_speed.x), min(displace.y, max_speed.y))
 #	look_at(player.position)
 #	velocity += displace
-	print(velocity)
 	velocity = velocity.normalized() * speed
-	var movement = move_and_slide(velocity)
+	var movement = move_and_collide(velocity)
+#	var collider = movement
 	
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		if collision.collider is Player:
-			collision.collider.move_and_slide(velocity - movement)
-			move_and_slide(velocity - movement)
+#			collision.collider.move_and_slide(velocity - movement)
+#			move_and_slide(velocity - movement)
 			break
+	
 	
 	
 

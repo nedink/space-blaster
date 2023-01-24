@@ -58,6 +58,7 @@ _global_script_class_icons={
 
 config/name="space-blaster"
 run/main_scene="res://World.tscn"
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
 
 [display]
 
@@ -119,4 +120,5 @@ pause={
 
 [rendering]
 
+environment/default_clear_color=Color( 0, 0, 0, 1 )
 environment/default_environment="res://default_env.tres"

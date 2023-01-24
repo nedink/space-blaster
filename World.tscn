@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://resources/star_field_hd.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://enemy/Enemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://line_monitor_behavior.gd" type="Script" id=5]
 [ext_resource path="res://enemy/CrabMite.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Cursor.gd" type="Script" id=7]
+[ext_resource path="res://Gun.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -25,13 +27,41 @@ shader_param/speed = 0.08
 
 [sub_resource type="Curve2D" id=3]
 _data = {
-"points": PoolVector2Array( -99.8271, -0.183506, 99.8271, 0.183506, -20, 20, -0.183504, -100.745, 0.183504, 100.745, 280, 90, 100.011, 0.183506, -100.011, -0.183506, -20, 160 )
+"points": PoolVector2Array( -30.0417, 35.4392, 30.0417, -35.4392, -7.02928, 48.9642, -0.183504, -100.745, 0.183504, 100.745, 165.129, 51.1115, 28.6149, -5.54779, -28.6149, 5.54779, 121.401, 95.4887, 0, 0, 0, 0, 87.6578, 70.4371, 19.9614, -5.79525, -19.9614, 5.79525, 35.3217, 124.477, -0.8965, 58.3764, 0.8965, -58.3764, -7.37359, 49.3221 )
 }
 
 [sub_resource type="Environment" id=4]
 background_mode = 4
+glow_intensity = 2.03
+glow_strength = 0.75
 glow_blend_mode = 0
-glow_hdr_threshold = 0.2
+
+[sub_resource type="Animation" id=5]
+resource_name = "click"
+tracks/0/type = "value"
+tracks/0/path = NodePath("./Node2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 2, 2 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Node2D:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 46.0, 38.4 ]
+}
 
 [node name="World" type="Node2D"]
 pause_mode = 2
@@ -83,21 +113,29 @@ __meta__ = {
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 50, 130 )
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+smoothing_enabled = true
+
+[node name="Gun" parent="Player" instance=ExtResource( 8 )]
+firing = false
+cooldownTime = 0.1
+
 [node name="Wave1" type="Node2D" parent="."]
 pause_mode = 1
 
 [node name="LineMonitorBehavior" type="Path2D" parent="Wave1"]
-position = Vector2( -40, 0 )
+position = Vector2( 27.2054, 50.2919 )
+scale = Vector2( 0.989094, 0.951607 )
 curve = SubResource( 3 )
 script = ExtResource( 5 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Wave1/LineMonitorBehavior"]
-position = Vector2( 201.917, 21.6729 )
-rotation = 0.192675
+position = Vector2( 165.138, 53.3712 )
+rotation = 1.57541
 offset = 222.11
 
 [node name="Enemy" parent="Wave1/LineMonitorBehavior/PathFollow2D" instance=ExtResource( 4 )]
-hp = 1
 
 [node name="Tween" type="Tween" parent="Wave1/LineMonitorBehavior"]
 
@@ -105,9 +143,42 @@ hp = 1
 environment = SubResource( 4 )
 
 [node name="CrabMite" parent="." instance=ExtResource( 6 )]
-position = Vector2( 100, 60 )
+position = Vector2( 131.954, 68.7858 )
 
 [node name="Cursor" type="Node2D" parent="."]
+script = ExtResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="Cursor"]
+
+[node name="Node2D" type="Node2D" parent="Cursor"]
+
+[node name="Polygon2D2" type="Polygon2D" parent="Cursor/Node2D"]
+position = Vector2( 10.7861, 3.60267 )
+rotation = 0.242719
+offset = Vector2( -11, -1 )
+polygon = PoolVector2Array( 1, -1, 4, -2, 5, -4, 3, -4 )
+
+[node name="Polygon2D3" type="Polygon2D" parent="Cursor/Node2D"]
+position = Vector2( -9.38873, 6.12225 )
+rotation = 2.48045
+offset = Vector2( -11, -1 )
+polygon = PoolVector2Array( 1, -1, 4, -2, 5, -4, 3, -4 )
+
+[node name="Polygon2D4" type="Polygon2D" parent="Cursor/Node2D"]
+position = Vector2( -1.06113, -11.3056 )
+rotation = -1.74995
+offset = Vector2( -11, -1 )
+polygon = PoolVector2Array( 1, -1, 4, -2, 5, -4, 3, -4 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Cursor/Node2D"]
+position = Vector2( 6.82823, 0.624195 )
+scale = Vector2( 0.624195, 0.624195 )
+color = Color( 1, 1, 1, 0.568627 )
+offset = Vector2( -11, -1 )
+polygon = PoolVector2Array( -6.84607, -5.86394, 2.52002, -8.89078, 7.83127, -3.63664, 7.77416, 5.61522, -1.36348, 8.41363, -1.36348, 7.27142, 5.66108, 4.07325, 6.63196, -3.06553, 1.83469, -6.54926, -5.9323, -5.1215, -5.81808, 1.78884, -1.53481, 7.27142, -1.53481, 8.41363, -8.27382, 2.41705 )
+
+[node name="Tween" type="Tween" parent="Cursor"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cursor"]
+anims/click = SubResource( 5 )
 [connection signal="tween_completed" from="Wave1/LineMonitorBehavior/Tween" to="Wave1/LineMonitorBehavior" method="_on_Tween_tween_completed"]

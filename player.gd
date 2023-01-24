@@ -4,6 +4,7 @@ class_name Player
 
 export var mass = 1.0
 export var speed = 100
+onready var gun = get_node("Gun")
 
 var inputs = {
 	"up": false,
@@ -22,6 +23,8 @@ onready var body = $CollisionPolygon2D
 func _physics_process(delta):
 	look_at(get_global_mouse_position())
 	
+#	if is_colliding
+	
 	
 	
 #	if position.distance_to(get_global_mouse_position()) > 16:
@@ -35,18 +38,33 @@ func _physics_process(delta):
 #	if position.distance_to(get_global_mouse_position()) > 16:
 #		position += 
 	
-	# move with wasd
-	velocity = Vector2.ZERO
+	# move with wasd - mono speed
+#	velocity = Vector2.ZERO
+#	if inputs["up"]:
+#		velocity += Vector2.UP
+#	if inputs["down"]:
+#		velocity += Vector2.DOWN
+#	if inputs["left"]:
+#		velocity += Vector2.LEFT
+#	if inputs["right"]:
+#		velocity += Vector2.RIGHT
+#	velocity = velocity.normalized() * speed
+
 	if inputs["up"]:
-		velocity += Vector2.UP
+		velocity += Vector2.UP * 15
 	if inputs["down"]:
-		velocity += Vector2.DOWN
+		velocity += Vector2.DOWN * 15
 	if inputs["left"]:
-		velocity += Vector2.LEFT
+		velocity += Vector2.LEFT * 15
 	if inputs["right"]:
-		velocity += Vector2.RIGHT
-	velocity = velocity.normalized() * speed
+		velocity += Vector2.RIGHT * 15
+		
+	if inputs["up"] or inputs["down"] or inputs["left"] or inputs["right"]:
+		velocity = velocity.clamped(80)
+	else:
+		velocity *= 0.7
 	
+#	if velocity 
 	
 	var step = move_and_slide(velocity)
 	
